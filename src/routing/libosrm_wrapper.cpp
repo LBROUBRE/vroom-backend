@@ -42,8 +42,9 @@ LibosrmWrapper::get_matrix(const std::vector<Location>& locs) const {
                     osrm::util::FloatLatitude({location.lat()}));
   }
 
-  osrm::json::Object result;
-  osrm::Status status = _osrm.Table(params, result);
+  auto out = osrm::engine::api::ResultT();
+  osrm::Status status = _osrm.Table(params, out);
+  auto result = out.get<osrm::json::Object>();
 
   if (status == osrm::Status::Error) {
     throw Exception(ERROR::ROUTING,
@@ -107,8 +108,9 @@ void LibosrmWrapper::add_route_info(Route& route) const {
                     osrm::util::FloatLatitude({step.location.lat()}));
   }
 
-  osrm::json::Object result;
-  osrm::Status status = _osrm.Route(params, result);
+  auto out = osrm::engine::api::ResultT();
+  osrm::Status status = _osrm.Route(params, out);
+  auto result = out.get<osrm::json::Object>();
 
   if (status == osrm::Status::Error) {
     throw Exception(ERROR::ROUTING,
