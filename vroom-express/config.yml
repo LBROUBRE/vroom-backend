@@ -1,5 +1,5 @@
 cliArgs:
-  geometry: false # retrieve geometry (-g)
+  geometry: true # retrieve geometry (-g)
   limit: '1mb' # max request size
   logdir: '/..' # the path for the logs relative to ./src
   maxlocations: 1000 # max number of jobs/shipments locations
@@ -24,7 +24,7 @@ routingServers:
     driving-car:
       host: '0.0.0.0'
       port: '8080'
-    driving-hgv:
+    driving-hgv: # TODO
       host: '0.0.0.0'
       port: '8080'
     cycling-regular:
